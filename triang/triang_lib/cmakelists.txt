@@ -1,0 +1,24 @@
+set(CUR ${CMAKE_CURRENT_SOURCE_DIR})
+
+set(INCLUDE_DIR ${CUR}/_include)
+file(GLOB LIB_HEADERS ${INCLUDE_DIR}/*.h)
+
+set(LIB_SOURCES "")
+file(GLOB CHILDREN ${CUR}/*)
+
+foreach(CHILD ${CHILDREN})
+	if(IS_DIRECTORY ${CHILD})
+		file(GLOB CHILD_SOURCES ${CHILD}/*.cpp)
+		list(APPEND LIB_SOURCES ${CHILD_SOURCES})
+	endif()
+endforeach()
+
+include_directories(${INCLUDE_DIR})
+
+add_library(${LIB}
+	STATIC ${LIB_HEADERS} ${LIB_SOURCES})
+target_include_directories(${LIB} PUBLIC ${INCLUDE_DIR})
+
+install(TARGETS ${LIB}
+	RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin
+	ARCHIVE DESTINATION ${PROJECT_BINARY_DIR}/bin)

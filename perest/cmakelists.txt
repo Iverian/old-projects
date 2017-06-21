@@ -1,0 +1,12 @@
+cmake_minimum_required(VERSION 2.8.11)
+
+set(MAIN perest)
+
+project(${MAIN})
+
+file(GLOB MAIN_HEADERS "*.h")
+file(GLOB MAIN_SOURCES "*.c")
+
+add_executable(${MAIN}
+               ${MAIN_HEADERS}
+               ${MAIN_SOURCES})

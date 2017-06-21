@@ -1,0 +1,12 @@
+set(CUR ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_subdirectory(gtest)
+
+file(GLOB TEST_HEADERS "*.h")
+file(GLOB TEST_SOURCES "*.cpp")
+
+add_executable(${TEST} ${TEST_HEADERS} ${TEST_SOURCES})
+target_link_libraries(${TEST} LINK_PUBLIC gtest ${LIB})
+
+install (TARGETS ${TEST}
+		RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin)

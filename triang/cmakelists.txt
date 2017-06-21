@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 2.8.11)
+
+set(CMAKE_CXX_STANDARD 14)
+
+set(MAIN triang)
+set(LIB triang_lib)
+set(TEST triang_test)
+
+project(${MAIN})
+
+add_subdirectory(${LIB})
+add_subdirectory(${TEST})
+
+file(GLOB MAIN_HEADERS "*.h")
+file(GLOB MAIN_SOURCES "*.cpp")
+
+add_executable(${MAIN} ${MAIN_HEADERS} ${MAIN_SOURCES})
+target_link_libraries(${MAIN} LINK_PUBLIC ${LIB})
+
+install(TARGETS ${MAIN}
+        RUNTIME DESTINATION ${PROJECT_BINARY_DIR}/bin)
